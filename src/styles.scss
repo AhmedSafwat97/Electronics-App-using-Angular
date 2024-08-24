@@ -1,1 +1,118 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+$MainColor: #EA4335;
+$main-transition: all 0.5s ease-in-out;
+$main-font : 'Encode Sans Expanded', sans-serif;
+$RatingColor: #FFD700;
+
+
+
+body {
+    margin: 0;
+    font-family: $main-font;
+}
+
+.logo {
+    font-weight: 600;
+}
+.badge-Color{
+background-color: $MainColor;
+color: #FFF;
+position: absolute;
+right: 0;
+}
+.d-flex-between{
+    display: flex;  
+   justify-content: space-between;
+}
+
+.d-flex-center{
+    display: flex;  
+   justify-content: center ;
+   align-items: center;
+   gap: 5px;
+}
+
+.Pointer {
+    cursor: pointer;
+}
+
+
+
+.rating {
+    color: $RatingColor;
+}
+
+ .font-small {
+    font-size: 0.8rem;
+ }
+
+ .maun-btn {
+    background-color: $MainColor;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    transition: $main-transition;
+    cursor: pointer;
+    &:hover {
+        background-color: $MainColor;
+        color: white;
+    }
+
+    &:disabled {
+        background-color: rgba(128, 128, 128, 0.461);
+        color: white;
+        cursor: not-allowed;
+    }
+}
+
+
+.product {
+    border : 1px solid $MainColor ; 
+    border-radius: 5px;
+    padding : 10px;
+    box-shadow:rgba(128, 128, 128, 0.461) 0px 0px 10px 1px;
+}
+
+
+
+.border{
+   border: 2px solid yellow;
+}
+
+
+.background{
+   background-color: red;
+ }
+
+ .search-btn{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: absolute;
+    right:5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+ }
+
+ .search-Input{
+    background-color: #f5f5f5;
+    width: 100%;
+    padding-right: 25px;
+ }
+
+
+.nav-route {
+  color: black;
+  cursor: pointer;
+}
+
+
+.active-Link{
+font-weight: 700;
+border-bottom: 2px solid black;
+
+ }
