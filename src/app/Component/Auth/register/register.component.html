@@ -1,1 +1,79 @@
-<p>register works!</p>
+<!-- Section: Design Block -->
+<section class="min-height: 100vh; display: flex; align-items: center;">
+  <!-- Jumbotron -->
+  <div class="px-4 py-5 px-md-3 text-center text-lg-start w-100" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container h-100">
+      <div class="row gx-lg-5 align-items-start h-100">
+        <!-- Image Column -->
+        <div class="col-md-6 col-lg-6 d-none d-lg-block">
+          <img src="./assets/Side Image.png"
+            alt="signup form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+        </div>
+
+        <!-- Form Column -->
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card h-100">
+            <div class="card-body py-5 px-md-5">
+              <!-- Title -->
+              <div>
+                <h2 class="mb-2">Create an account</h2>
+                <p>Enter your details below</p>
+              </div>
+              
+              <!-- Signup Form -->
+              <form>
+                <!-- Name Inputs -->
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                      <label class="form-label" for="form3Example1">First name</label>
+                      <input type="text" id="form3Example1" class="form-control" placeholder="First name" />
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div data-mdb-input-init class="form-outline">
+                      <label class="form-label" for="form3Example2">Last name</label>
+                      <input type="text" id="form3Example2" class="form-control" placeholder="Last name" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Email Input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3">Email address</label>
+                  <input type="email" id="form3Example3" class="form-control" placeholder="Email address" />
+                </div>
+
+                <!-- Password Input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4">Password</label>
+                  <input type="password" id="form3Example4" class="form-control" placeholder="Password" />
+                </div>
+
+                <!-- Confirm Password Input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="form3Example5">Confirm Password</label>
+                  <input type="password" id="form3Example5" class="form-control" placeholder="Confirm Password" />
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="main-btn mb-4 w-100">
+                  Sign up
+                </button>
+
+                <!-- Login Link -->
+                <div class="w-100 d-flex justify-content-center">
+                  <p class="mb-0">Already have an account? <a routerLink="/login">Log in</a></p>
+                </div>
+              </form>
+              <!-- End of Signup Form -->
+            </div>
+          </div>
+        </div>
+        <!-- End of Form Column -->
+      </div>
+    </div>
+  </div>
+  <!-- End of Jumbotron -->
+</section>
+<!-- End of Section: Design Block -->

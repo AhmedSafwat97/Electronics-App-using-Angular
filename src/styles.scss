@@ -49,20 +49,21 @@ right: 0;
     font-size: 0.8rem;
  }
 
- .maun-btn {
+ .main-btn {
     background-color: $MainColor;
     color: white;
     border-radius: 5px;
     border: none;
+    padding: 10px;
     transition: $main-transition;
     cursor: pointer;
     &:hover {
-        background-color: $MainColor;
+        background-color: #ea4435be;
         color: white;
     }
 
     &:disabled {
-        background-color: rgba(128, 128, 128, 0.461);
+        background-color: rgba(128, 128, 128, 0.317);
         color: white;
         cursor: not-allowed;
     }
@@ -79,7 +80,7 @@ right: 0;
 
 
 .border{
-   border: 2px solid yellow;
+   border: 2px solid black;
 }
 
 
@@ -115,4 +116,11 @@ right: 0;
 font-weight: 700;
 border-bottom: 2px solid black;
 
+ }
+
+
+ .form-control{
+    border : none !important;
+    border-bottom: 1px solid $MainColor !important;
+    border-radius: 0 !important;
  }
