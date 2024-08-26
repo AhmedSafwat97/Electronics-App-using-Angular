@@ -17,24 +17,45 @@
                 <h2 class="mb-2">Log in to Exclusive</h2>
                 <p>Enter your details below</p>
               </div>
-              <form>
-
+              <div>{{ErrorMessage | json}}</div>
+              <form [formGroup]="login" (ngSubmit)="OnSubmit()">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example3">Email address</label>
-                  <input type="email" id="form3Example3" class="form-control" placeholder="Email address" />
+                  <input type="email" id="form3Example3" 
+                  class="form-control" 
+                  placeholder="Email address"
+                  formControlName="Email"
+                  />
+                
+                  <div class="bg-error" *ngIf="login.get('Email')?.errors && login.get('Email')?.touched">
+                    <p *ngIf="login.get('Email')?.errors?.['required']">You must enter a email</p>
+                    <p *ngIf="login.get('Email')?.errors?.['email']">Please enter a valid email</p>
+                  </div>
+                
+                
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example4">Password</label>
-                  <input type="password" id="form3Example4" class="form-control" placeholder="Password" />
+                  <input type="password" id="form3Example4" 
+                  class="form-control"
+                   placeholder="Password" 
+                   formControlName="password"
+                   />
+                
+                  <div class="bg-error" *ngIf="login.get('password')?.errors && login.get('password')?.touched">
+                    <p *ngIf="login.get('password')?.errors?.['required']">You must enter a password</p>
+                  </div>
+                
                 </div>
 
                 <!-- Submit button -->
                 <div class="w-100 d-flex justify-content-between align-items-center mb-4">
                   <button type="submit" class="main-btn w-25">
                     Login
+                    <i *ngIf="IsLoading" class="fas fa-spinner fa-spin"></i>
                   </button>
                   <div>
                     <span>Forgot password?</span>

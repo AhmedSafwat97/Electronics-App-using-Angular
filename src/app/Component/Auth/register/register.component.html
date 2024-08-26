@@ -1,13 +1,20 @@
 <!-- Section: Design Block -->
 <section class="min-height: 100vh; display: flex; align-items: center;">
   <!-- Jumbotron -->
-  <div class="px-4 py-5 px-md-3 text-center text-lg-start w-100" style="background-color: hsl(0, 0%, 96%)">
+  <div
+    class="px-4 py-5 px-md-3 text-center text-lg-start w-100"
+    style="background-color: hsl(0, 0%, 96%)"
+  >
     <div class="container h-100">
       <div class="row gx-lg-5 align-items-start h-100">
         <!-- Image Column -->
         <div class="col-md-6 col-lg-6 d-none d-lg-block">
-          <img src="./assets/Side Image.png"
-            alt="signup form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+          <img
+            src="./assets/Side Image.png"
+            alt="signup form"
+            class="img-fluid"
+            style="border-radius: 1rem 0 0 1rem"
+          />
         </div>
 
         <!-- Form Column -->
@@ -19,51 +26,133 @@
                 <h2 class="mb-2">Create an account</h2>
                 <p>Enter your details below</p>
               </div>
-              
+              <div>{{ErrorMessage | json}}</div>
               <!-- Signup Form -->
-              <form>
-                <!-- Name Inputs -->
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <label class="form-label" for="form3Example1">First name</label>
-                      <input type="text" id="form3Example1" class="form-control" placeholder="First name" />
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div data-mdb-input-init class="form-outline">
-                      <label class="form-label" for="form3Example2">Last name</label>
-                      <input type="text" id="form3Example2" class="form-control" placeholder="Last name" />
-                    </div>
-                  </div>
-                </div>
+              <form [formGroup]="register" (ngSubmit)="onSubmit()" >
+             <!-- Name Inputs -->
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div data-mdb-input-init class="form-outline">
+        <label class="form-label" for="First">First name</label>
+        <input
+          type="text"
+          id="First"
+          class="form-control"
+          placeholder="First name"
+          formControlName="FName"
+        />
+      </div>
 
-                <!-- Email Input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <label class="form-label" for="form3Example3">Email address</label>
-                  <input type="email" id="form3Example3" class="form-control" placeholder="Email address" />
-                </div>
+      <div class="bg-error"  *ngIf="register.get('FName')?.errors && register.get('FName')?.touched">
+        <p *ngIf="register.get('FName')?.errors?.['required']">First name is required</p>
+        <p *ngIf="register.get('FName')?.errors?.['minlength']">Min length is 3</p>
+        <p *ngIf="register.get('FName')?.errors?.['maxlength']">Max Length is 10</p>
+      </div>
+    </div>
 
-                <!-- Password Input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <label class="form-label" for="form3Example4">Password</label>
-                  <input type="password" id="form3Example4" class="form-control" placeholder="Password" />
-                </div>
+    <div class="col-md-6 mb-4">
+      <div data-mdb-input-init class="form-outline">
+        <label class="form-label" for="Last">Last name</label>
+        <input
+          type="text"
+          id="Last"
+          class="form-control"
+          placeholder="Last name"
+          formControlName="LName"
+        />
+      </div>
+      <div class="bg-error"  *ngIf="register.get('LName')?.errors && register.get('LName')?.touched">
+        <p *ngIf="register.get('LName')?.errors?.['required']">Last name is required</p>
+        <p *ngIf="register.get('LName')?.errors?.['minlength']">Min length is 3</p>
+        <p *ngIf="register.get('LName')?.errors?.['maxlength']">Max Length is 10</p>
+      </div>
+    </div>
+  </div>
 
-                <!-- Confirm Password Input -->
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <label class="form-label" for="form3Example5">Confirm Password</label>
-                  <input type="password" id="form3Example5" class="form-control" placeholder="Confirm Password" />
-                </div>
+  <!-- Email Input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <label class="form-label" for="Email">Email address</label>
+    <input
+      type="email"
+      id="Email"
+      class="form-control"
+      placeholder="Email address"
+      formControlName="Email"
+    />
 
-                <!-- Submit Button -->
-                <button type="submit" class="main-btn mb-4 w-100">
-                  Sign up
-                </button>
+    <div class="bg-error" *ngIf="register.get('Email')?.errors && register.get('Email')?.touched">
+      <p *ngIf="register.get('Email')?.errors?.['required']">Email is required</p>
+      <p *ngIf="register.get('Email')?.errors?.['email']">Please enter a valid email</p>
+    </div>
+  </div>
+
+  <!-- Password Input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <label class="form-label" for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      class="form-control"
+      placeholder="Password"
+      formControlName="password"
+    />
+
+    <div class="bg-error"  *ngIf="register.get('password')?.errors && register.get('password')?.touched">
+      <ul *ngIf="register.get('password')?.errors?.['pattern']">
+        <li>Minimum length of 8 characters 
+        </li>
+        <li>At least one uppercase letter (A-Z)</li>
+        <li>At least one lowercase letter (a-z)
+        </li>
+        <li>At least one digit (0-9)
+        </li>
+        <li>At least one special character (e.g., !&#64;#$%^&*)
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Confirm Password Input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <label for="confirm">Confirm Password</label>
+    <input
+      type="password"
+      id="confirm"
+      class="form-control"
+      placeholder="Confirm Password"
+      formControlName="RePassword"
+    />
+    <div class="bg-error" *ngIf="register.get('RePassword')?.errors && register.get('RePassword')?.touched">
+      <p>Passwords do not match</p>
+    </div>
+  </div>
+
+  <!-- Phone Input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <label class="form-label" for="Phone">Phone</label>
+    <input
+      id="Phone"
+      class="form-control"
+      placeholder="Enter Your Phone"
+      formControlName="Phone"
+    />
+    <div class="bg-error" *ngIf="register.get('Phone')?.errors && register.get('Phone')?.touched">
+      <p *ngIf="register.get('Phone')?.errors?.['required']">Phone number is required</p>
+      <p *ngIf="register.get('Phone')?.errors?.['pattern']">Please enter a valid Egyptian phone number</p>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <button [disabled]="register.invalid" type="submit" class="main-btn mb-4 w-100">
+    Sign up
+  <i *ngIf="IsLoading" class="fas fa-spinner fa-spin"></i>
+  </button>
 
                 <!-- Login Link -->
                 <div class="w-100 d-flex justify-content-center">
-                  <p class="mb-0">Already have an account? <a routerLink="/login">Log in</a></p>
+                  <p class="mb-0">
+                    Already have an account? <a routerLink="/login">Log in</a>
+                  </p>
                 </div>
               </form>
               <!-- End of Signup Form -->

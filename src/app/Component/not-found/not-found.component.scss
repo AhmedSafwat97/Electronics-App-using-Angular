@@ -1,0 +1,25 @@
+.main-page {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+.not-found-container {
+    text-align: center;
+    padding: 30px;
+}
+.not-found-container h1 {
+    font-size: 100px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.not-found-container p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.btn-home {
+    padding: 10px 20px;
+    font-size: 18px;
+}

@@ -23,7 +23,14 @@ export const routes: Routes = [
         {path: 'login', loadComponent: () => import('./Component/Auth/login/login.component').then(m => m.LoginComponent) , title: 'Login'},
         {path: 'register', loadComponent: () => import('./Component/Auth/register/register.component').then(m => m.RegisterComponent) , title: 'Register'}
     ]
+} ,
+
+
+{
+    path: '**', loadComponent: () => import('./Component/not-found/not-found.component').then(m => m.NotFoundComponent)   
 }
+
+
 
 ]
 
