@@ -1,6 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { authGuard } from './Guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -11,7 +12,13 @@ export const routes: Routes = [
             {path: 'home', loadComponent: () => import('./Component/home/home.component').then(m => m.HomeComponent) , title: 'Home'},
             {path: 'about', loadComponent: () => import('./Component/about/about.component').then(m => m.AboutComponent) , title: 'About'},
             {path: 'contact', loadComponent: () => import('./Component/contact/contact.component').then(m => m.ContactComponent) , title: 'Contact'},
-            {path: 'cart', loadComponent: () => import('./Component/cart/cart.component').then(m => m.CartComponent) , title: 'Cart'},
+            {path: 'cart', 
+                canActivate: [authGuard],
+                loadComponent: () => import('./Component/cart/cart.component').then(m => m.CartComponent) , title: 'Cart'},
+            {path: 'wishlist', 
+                canActivate: [authGuard],
+                loadComponent: () => import('./Component/wishlist/wishlist.component').then(m => m.WishlistComponent) , title: 'Wishlist'},
+
         ]
     
     } ,   

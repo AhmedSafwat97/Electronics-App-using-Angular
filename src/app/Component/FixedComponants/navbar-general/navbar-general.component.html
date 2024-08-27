@@ -19,11 +19,11 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="container-fluid">
+      <div class="container">
         <div class="row w-100">
 
           <!-- navbar links -->
-          <div class="col-12 col-lg-5">
+          <div class="col-12 col-lg-4">
             <ul class="navbar-nav mb-2 mb-lg-0 text-center">
               <li
                 class="nav-route"
@@ -51,13 +51,40 @@
                 routerLinkActive="active-Link"
                 routerLink="/login"
               >
-                <a class="nav-link" aria-current="page">Login</a>
+                <a  class="nav-link" aria-current="page">Login</a>
               </li>
+
+              <!-- Vew in the mobile only -->
+              <li
+              class="nav-route d-block d-lg-none"
+              routerLinkActive="active-Link"
+              routerLink="/login"
+            >
+              <a class="nav-link" aria-current="page"><i class="fa-regular fa-user"></i> Manage My Account</a>
+            </li>
+
+
+            <li
+              class="nav-route d-block d-lg-none"
+              routerLinkActive="active-Link"
+              routerLink="/login"
+            >
+              <a class="nav-link" aria-current="page"><i class="fa-solid fa-bag-shopping"></i> My Orders</a>
+            </li>
+
+            <li *ngIf="loginUser"
+            class="nav-route d-block d-lg-none"
+            routerLinkActive="active-Link"
+            routerLink="/login"
+          >
+            <a (click)="logout()" class="nav-link" aria-current="page"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+          </li>
+
             </ul>
           </div>
 
           <!-- search form -->
-          <div class="col-12 col-lg-5">
+          <div class="col-12 col-lg-4">
             <form style="position: relative" role="search">
               <input
                 class="form-control w-100"
@@ -71,8 +98,13 @@
             </form>
           </div>
 
+
+
+
+
+
         <!-- The Icon Of the navbar -->
-          <div class="col-12 col-lg-2 d-flex-center Pointer my-4 my-xl-0">
+          <div class="col-12 col-lg-4 d-flex-center Pointer d-none d-lg-flex">
        <div style="position: relative" >
         <svg class="w-10 h-10 text-gray-800 dark:text-white pointer" routerLink="/cart" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="37" height="37" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
@@ -84,13 +116,24 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
           </svg>
         </div>
-              <div *ngIf="loginUser" >
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#EA4335" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd" d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-              
+        <div *ngIf="loginUser" class="dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#EA4335" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+  
+          <ul *ngIf="loginUser" class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item"><i class="fa-regular fa-user"></i> Manage My Account</a></li>
+            <li><a class="dropdown-item"><i class="fa-solid fa-bag-shopping"></i> My Orders</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+          </ul>
         </div>
+        
+        </div>
+
+
 
 
         </div>

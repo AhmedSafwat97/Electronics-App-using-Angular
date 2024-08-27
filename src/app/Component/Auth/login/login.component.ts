@@ -27,10 +27,11 @@ export class LoginComponent {
 
   OnSubmit(){
     this._AuthService.SetLogin(this.login.value).subscribe({
-      next : (response) => {
+      next : (response) => { 
         console.log(response);
 
         if (response.message === 'user logged in successfully') {
+          localStorage.setItem('token' , response.token)
           this.IsLoading = true;
           this.Router.navigate(['/home'])
         }
