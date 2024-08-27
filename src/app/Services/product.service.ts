@@ -20,7 +20,7 @@ export class ProductService {
 
 
   GetBestseller():Observable<any>{
-    return this._HttpClient.get('https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product/best/seller')
+    return this._HttpClient.get('https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product/best/seller?limit=4')
   }
 
 

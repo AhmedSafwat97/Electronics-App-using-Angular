@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Product } from '../../Sheared/Interfaces/product';
 import { ProductCartComponent } from "../Sheared-Components/product-cart/product-cart.component";
+import { Category } from '../../Sheared/categorry';
 
 @Component({
   selector: 'app-home',
@@ -73,7 +74,8 @@ export class HomeComponent implements OnInit {
   
 
   saleProducts: Product[] = [] ;
-  Categories: [] = [] ;
+  BesSeller: Product[] = [] ;
+  Categories: Category[] = [] ;
 
 
   fullStars: number[] = [];
@@ -87,12 +89,11 @@ export class HomeComponent implements OnInit {
     return Math.trunc(100 - (Price / PriceBeforeDiscount) * 100);
   }
 
-
   //All Products
   ngOnInit(): void {
     this._ProductService.GetAllProduct().subscribe({
       next: (response) => {
-        console.log(response.data);
+        // console.log(response.data);
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -102,7 +103,8 @@ export class HomeComponent implements OnInit {
     // Bestseller
     this._ProductService.GetBestseller().subscribe({
       next: (response) => {
-        console.log(response.data);
+        this.BesSeller = response.data
+        console.log(this.BesSeller);
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -111,11 +113,16 @@ export class HomeComponent implements OnInit {
 
     this._ProductService.GetSaleProduct().subscribe({
       next: (response) => {
-
         this.saleProducts = response.data
-        console.log(this.saleProducts);
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      }
+    });
 
-
+    this._ProductService.GetAllCategories().subscribe({
+      next: (response) => {
+        this.Categories = response.data
       },
       error: (err) => {
         console.error('Error fetching products:', err);
