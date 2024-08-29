@@ -93,8 +93,6 @@ export class ProductService {
     );
   }
 
-
-  
   RemoveProductFromFav(ProductId: any): Observable<any> {
     return this._HttpClient.delete(
       `  https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Wishlist/`, 

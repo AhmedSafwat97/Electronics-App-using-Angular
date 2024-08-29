@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { Product } from '../../Sheared/Interfaces/product';
 
@@ -14,7 +14,7 @@ import { Product } from '../../Sheared/Interfaces/product';
 export class CartComponent implements OnInit {
 
 
-  constructor(private _ProductService: ProductService , private _Renderer2:Renderer2) { }   
+  constructor(private _ProductService: ProductService , private _Renderer2:Renderer2 , private _Router:Router) { }   
 
   CartProducts:any[] = []
   TotalPrice: number = 0
@@ -23,10 +23,19 @@ export class CartComponent implements OnInit {
 
     this._ProductService.RemoveCartProducts(ProductId).subscribe({
       next: (response) => {
+
         if (response.message === 'Product removed successfully') {
           this.CartProducts = response.data.items;
           this.TotalPrice = response.totalPrice
+          this._ProductService.CartItems.next(this.CartProducts.length)
         }
+
+        if (this.CartProducts.length === 0) {
+          this._Router.navigate(['/home'])
+        }
+
+
+
       },
       error: (err) => {
         console.log(err);
@@ -56,6 +65,9 @@ export class CartComponent implements OnInit {
       })
   
     }
+
+
+
   ngOnInit(): void {
 
     this._ProductService.GetCartProducts().subscribe({

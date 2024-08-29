@@ -16,6 +16,7 @@ export interface Product {
   updatedAt: string
   slug: string
   __v: number
+  IsFav: boolean
 }
 
 export interface Category {

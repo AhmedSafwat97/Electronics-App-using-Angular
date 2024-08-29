@@ -1,1 +1,73 @@
-<p>wishlist works!</p>
+<section class="my-5 container">
+  <h2>WishList</h2>
+  <div *ngIf="Wishlist.length > 0; else Empty" class="mt-5">
+    <div
+      class="d-flex flex-wrap justify-content-center align-items-center flex-wrap"
+    >
+      <!-- Product Cart -->
+      <div
+        *ngFor="let Product of Wishlist; let i = index"
+        style="position: relative"
+      >
+        <!-- Product Cart -->
+        <div class="product" style="position: relative">
+          <div [routerLink]="['/product-details', Product.product._id]">
+            <div class="w-100 h-100">
+              <img
+                [src]="Product.product.images[0]"
+                class="card-img-top product-img"
+                alt="Sunset Over the Sea"
+              />
+            </div>
+            <div class="card-body mt-2">
+              <h6>{{ Product.product.Name }}</h6>
+              <div class="d-flex align-items-center">
+                <span>{{ Product.product.price }}</span>
+                <span class="text-muted mx-2 text-decoration-line-through">{{
+                  Product.product.PriceBeforeDiscount
+                }}</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="fa-solid fa-star rating"></i>
+                  <span class="mx-2">{{ Product.product.Rating }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ToCart">
+            <button
+              #btn
+              (click)="AddToCart(Product.product._id , btn)"
+              class="w-100 btn btn-danger"
+            >
+              <i class="fa-solid fa-cart-plus"></i> Add To Cart
+            </button>
+          </div>
+
+          <!-- The Wishlist and discount  -->
+          <div
+            class="d-flex justify-content-between align-items-center p-3 w-100"
+            style="position: absolute; top: 0"
+          >
+            <span class="bg-danger text-white px-2"
+              >{{ Discount(Product.product.price, Product.product.PriceBeforeDiscount) }}%</span
+            >
+            <i
+              class="fa-solid fa-heart color-red "
+              (click)="RemoveFromFav(Product.product._id)"
+            >
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #Empty>
+    <h3 class="text-center">WishList Is Empty</h3>
+  </ng-template>
+
+
+</section>

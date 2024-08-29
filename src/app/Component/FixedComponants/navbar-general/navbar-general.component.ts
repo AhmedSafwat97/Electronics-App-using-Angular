@@ -42,8 +42,6 @@ export class NavbarGeneralComponent implements OnInit { // Corrected syntax
   ngOnInit(): void { // Corrected method placement
     this.isLogin(); // Added 'this' to refer to the method in the class
     
-    console.log('Hello')
-
     this._ProductService.CartItems.subscribe({
       next: (response) => {
         this.CartCount = response

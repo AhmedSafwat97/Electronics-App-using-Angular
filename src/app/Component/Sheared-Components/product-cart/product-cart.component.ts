@@ -34,10 +34,13 @@ export class ProductCartComponent  {
     if (this.activeIndices.has(index)) {
       this.activeIndices.delete(index); // Remove from active state if already active
       this.RemoveFromFav(this.Product._id)
+      console.log("delete");
     } else {
       this.activeIndices.add(index); // Add to active state if not active
       this.IsFav = true ;
       this.AddToFav(this.Product._id)
+      console.log("add");
+
     }
 
 // Product added to wishlist successfully
@@ -98,6 +101,7 @@ export class ProductCartComponent  {
     this.Quantity++;
     this._ProductService.RemoveProductFromFav(ProductId).subscribe({
       next: (response) => {
+        console.log(response);
         this.toastr.error('Click to go to wishlist', response.message).onTap.subscribe(() => {
           this._Router.navigate(['/wishlist']);});
       },  error: (err) => {

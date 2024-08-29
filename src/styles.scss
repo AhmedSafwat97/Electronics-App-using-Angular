@@ -114,6 +114,17 @@ right: 0;
     }
   }
 
+  .fa-solid.fa-heart.color-red {
+    color:  red;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  
+    &.active {
+      color: #f9d1d1;
+    }
+  }
+
 
 .product-img{
     width: 100%;

@@ -1,6 +1,6 @@
 import { routes } from './../../app.routes';
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavbarGeneralComponent } from '../../Component/FixedComponants/navbar-general/navbar-general.component';
 import { FooterComponent } from '../../Component/FixedComponants/footer/footer.component';
 import { RouterModule } from '@angular/router';
@@ -14,12 +14,4 @@ import { RouterModule } from '@angular/router';
 })
 export class BlankLayoutComponent {
 
-
-
 }
-
-
-
-
-
-
