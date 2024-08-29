@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import 'ngx-toastr/toastr';
 
 $MainColor: #EA4335;
 $main-transition: all 0.5s ease-in-out;
@@ -71,6 +72,13 @@ right: 0;
 .ToCart {
     display: none;
     transition: display 2s ;
+    position: absolute;
+    top: 65%;
+    left: 65%;
+    transform: translate(-65%,-65%);
+    cursor: pointer;
+    width: 100%;
+ 
 }  
 
 .carWidth{
@@ -81,12 +89,31 @@ right: 0;
     border : 1px solid $MainColor ; 
     border-radius: 5px;
     padding : 10px;
-    max-height: 350px;
+    width: 250px;
+    max-height: 300px;
+    overflow: hidden;
+    margin: 10px 10px;
 
     &:hover .ToCart {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center
     }
 }
+
+
+
+.fa-solid.fa-heart {
+    color:  #f9d1d1;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  
+    &.active {
+      color: red;
+    }
+  }
+
 
 .product-img{
     width: 100%;
@@ -152,3 +179,39 @@ border-bottom: 2px solid black;
     border-bottom: 1px solid $MainColor !important;
     border-radius: 0 !important;
  }
+
+
+
+/* Ensure Toastr is fixed at the bottom of the viewport */
+.toast-bottom-right {
+    position: fixed;
+    bottom: 20px;  /* Adjust as needed */
+    right: 20px;   /* Adjust as needed */
+    z-index: 1050;
+    pointer-events: none; /* Ensure toasts don't interfere with other UI interactions */
+    width: auto; /* Optional: set the width as per your design */
+  }
+  
+  /* Ensure individual toasts are styled correctly */
+  .toast {
+    margin-bottom: 10px; /* Space between multiple toasts */
+    pointer-events: auto; /* Re-enable pointer events for the individual toasts */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Ensure the body and html take full height and allow fixed positioning */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Optional: prevent horizontal scrolling */
+  }
+
+
+
+  .wishlist{
+    &:hover{
+        background-color: red;
+        color: white;
+    }
+  }

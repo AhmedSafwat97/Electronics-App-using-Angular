@@ -1,30 +1,39 @@
-<div class="card product" routerLink="/cart" style="position: relative;">
-    <div class="w-100 h-100">
-        <img [src]="Product.images[0]" class="card-img-top product-img" alt="Sunset Over the Sea"/>
-    </div>
-
-    <div class="card-body mt-2">
-        <h6>{{Product.Name}}</h6>
-        <div class="d-flex align-items-center">
-            <span>{{Product.price}}</span>
-            <span class="text-muted mx-2 text-decoration-line-through">{{Product.PriceBeforeDiscount}}</span>
+<!-- Product Cart -->
+<div class="product" style="position: relative;">
+    <div [routerLink]="['/product-details', Product._id]">
+        <div class="w-100 h-100">
+            <img [src]="Product.images[0]" class="card-img-top product-img" alt="Sunset Over the Sea"/>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
-               <div>
-                <i class="fa-solid fa-star rating"></i>
-                <span class="mx-2">{{Product.Rating}}</span>
-               </div>
-
-               <div class="ToCart">
-                <span role="button" routerLink="/cart"><i class="fa-solid fa-cart-plus"></i></span>
+        <div class="card-body mt-2">
+            <h6>{{Product.Name}}</h6>
+            <div class="d-flex align-items-center">
+                <span>{{Product.price}}</span>
+                <span class="text-muted mx-2 text-decoration-line-through">{{Product.PriceBeforeDiscount}}</span>
             </div>
-
+            <div class="d-flex justify-content-between align-items-center">
+                   <div>
+                    <i class="fa-solid fa-star rating"></i>
+                    <span class="mx-2">{{Product.Rating}}</span>
+                   </div>
+            </div>
         </div>
     </div>
+
+
+    <div class="ToCart"> 
+        <button #btn  (click)="AddToCart(Product._id , btn)" class="w-100 btn btn-danger"><i class="fa-solid fa-cart-plus"></i> Add To Cart </button>
+    </div>
+
 
     <!-- The Wishlist and discount  -->
     <div class="d-flex justify-content-between align-items-center p-3 w-100" style="position: absolute; top: 0; ">
         <span class="bg-danger text-white px-2">{{Discount(Product.price , Product.PriceBeforeDiscount)}}%</span>
-        <i class="fa-regular fa-heart mx-2"></i>
+        <i
+        class="fa-solid fa-heart mx-2"
+        [ngClass]="{ 'active': isActive(i) }"
+        (click)="toggleActive(i)">
+      </i>
     </div>
+
+
   </div>

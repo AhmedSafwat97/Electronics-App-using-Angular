@@ -1,1 +1,72 @@
-<p>product-details works!</p>
+
+<div class="container">
+<!-- The Main Section -->
+    <section class="my-5">
+
+        <p class="mb-3">{{Product.category.Name}} / {{Product.brand.Name}} / <span class="fw-bold">{{Product.Name}}</span></p>
+
+        <div  class="row" > 
+            <div class="col-12 col-md-12 col-lg-7">
+                <img src="{{Product.images}}" alt="">
+            </div>
+    
+            <div class="col-12 col-lg-4">
+                <div>
+                    <h6 class="text-uppercase fw-bold mb-2">{{Product.Name}}</h6>
+                    <div>
+                        <i class="fa-solid fa-star rating"></i>
+                        <span class="mx-2">{{Product.Rating}}</span>
+                    </div>
+        
+                    <div class="d-flex align-items-center">
+                        <span class="fs-4">{{Product.price}}</span>
+                        <span class="text-muted mx-2 text-decoration-line-through fs-4">{{Product.PriceBeforeDiscount}}</span>
+                    </div>
+                    <p>{{Product.Description}}</p>
+                    <hr>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <button (click)="decreaseQuantity()" class="main-btn" style="background-color: transparent; color: black; outline: 1px solid black;" >-</button>
+                        <span class="mx-2"> {{quantity}} </span>
+                        <button (click)="increaseQuantity()" class="main-btn">+</button>
+                    </div>
+
+                    <button (click)="AddToCart(Product._id)" class="main-btn"><i class="fa-solid fa-cart-plus"></i> Add To Cart </button>
+                    
+                    <button (click)="AddToFav(Product._id)" class="wishlist"><i class="fa-regular fa-heart"></i></button>
+                
+                </div>
+
+                <div class="w-100 d-flex justify-content-center mt-4">
+                    <img class="w-100" src="./assets/prodetails.png" alt="">
+                </div>
+
+                <div>
+            </div>
+        </div>
+    
+        </div>
+
+    
+    </section>
+
+<!-- Related Product Section -->
+<section class="my-5">
+    <h4 >Related Products</h4>
+<div class="mt-5" >
+    <div class="d-flex flex-wrap justify-content-center align-items-center flex-wrap">
+            <!-- Product Cart -->
+            <div *ngFor="let Product of relatedProducts ; let i = index" style="position: relative;">
+                
+                <app-product-cart [Product]="Product" [i] = "i" ></app-product-cart>
+
+              </div>
+    </div>
+</div>
+</section>
+
+
+</div>

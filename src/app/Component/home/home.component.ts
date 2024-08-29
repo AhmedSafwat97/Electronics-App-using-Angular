@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
         items: 1
       },
       400: {
-        items: 1
+        items: 2
       },
       740: {
         items: 3
@@ -66,6 +66,23 @@ export class HomeComponent implements OnInit {
     autoplayTimeout: 5000,
   };
 
+  activeIndices: Set<number> = new Set<number>(); // To keep track of active indices
+  items = [/* Your data here */]; // Example array of items
+
+  // Method to check if the index is active
+  isActive(index: number): boolean {
+    return this.activeIndices.has(index);
+  } 
+  IsFav: boolean = false ;
+  // Method to toggle the active state
+  toggleActive(index: number) {
+    if (this.activeIndices.has(index)) {
+      this.activeIndices.delete(index); // Remove from active state if already active
+    } else {
+      this.activeIndices.add(index); // Add to active state if not active
+      this.IsFav = true ;
+    }
+  }
   slidesStore: any[] = [
     { src: './assets/bannars/2.jpg' },
     { src: './assets/bannars/3.jpg' },
@@ -75,6 +92,7 @@ export class HomeComponent implements OnInit {
 
   saleProducts: Product[] = [] ;
   BesSeller: Product[] = [] ;
+  AllProduct: Product[] = [] ;
   Categories: Category[] = [] ;
 
 
@@ -93,7 +111,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this._ProductService.GetAllProduct().subscribe({
       next: (response) => {
-        // console.log(response.data);
+        this.AllProduct = response.data
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -104,7 +122,6 @@ export class HomeComponent implements OnInit {
     this._ProductService.GetBestseller().subscribe({
       next: (response) => {
         this.BesSeller = response.data
-        console.log(this.BesSeller);
       },
       error: (err) => {
         console.error('Error fetching products:', err);

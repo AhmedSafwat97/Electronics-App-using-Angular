@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule, RouterLinkActive, Router } from '@angular/router';
+import { ProductService } from '../../../Services/product.service';
 
 @Component({
   selector: 'app-navbar-general',
@@ -12,12 +13,10 @@ import { RouterModule, RouterLinkActive, Router } from '@angular/router';
 export class NavbarGeneralComponent implements OnInit { // Corrected syntax
 
 
-  constructor(private router:Router) { }
-
-
+  constructor(private router:Router , private _ProductService: ProductService) { }
   loginUser: boolean = false;
   OpenDropDown: boolean = false;
-
+  CartCount: number = 0;
 
   IsOpen() { 
       this.loginUser = false ? this.OpenDropDown = true : this.OpenDropDown = false;
@@ -40,9 +39,30 @@ export class NavbarGeneralComponent implements OnInit { // Corrected syntax
     this.isLogin();
   }
 
-
   ngOnInit(): void { // Corrected method placement
     this.isLogin(); // Added 'this' to refer to the method in the class
+    
+    console.log('Hello')
+
+    this._ProductService.CartItems.subscribe({
+      next: (response) => {
+        this.CartCount = response
+      },
+      error: (err) => {
+        console.error('Error fetching cart items:', err);
+      }
+    });
+
+    this._ProductService.GetCartProducts().subscribe({
+      next: (response) => {
+        this.CartCount = response.data.items.length;
+      },
+      error: (err) => {
+        console.error('Error fetching cart items:', err);
+      }
+    });
+
+
   }
 
 }
