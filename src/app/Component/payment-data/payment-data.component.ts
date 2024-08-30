@@ -60,7 +60,6 @@ ngOnInit(): void {
       this.CartProducts = response.data.items
       this.TotalPrice = response.totalPrice
       this.cartId = response.data._id
-      console.log(this.CartProducts)
     },
     error: (err) => {
       console.log(err);
