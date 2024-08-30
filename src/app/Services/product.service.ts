@@ -40,6 +40,13 @@ export class ProductService {
     return this._HttpClient.get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Categorybrands/${CategoryID}`)
   }
 
+  GetCategoryProducts( categoryName:any ):Observable<any>{
+    return this._HttpClient
+    .get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product?categoryName=${categoryName}`)
+  }
+
+
+
 
   GetAllBrands():Observable<any>{
     return this._HttpClient.get('https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Brand')
