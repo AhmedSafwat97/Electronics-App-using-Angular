@@ -23,9 +23,8 @@
           </ng-template>
         </ng-container>
       </owl-carousel-o>
-
       <div class="w-100 d-flex justify-content-center">
-        <button class="main-btn">View All Products</button>
+        <button [routerLink]="['/Products' , 'FlashSale']"  class="main-btn">View All Products</button>
       </div>
 
 </section>
@@ -81,7 +80,7 @@
 </div>
 
 <div class="w-100 d-flex justify-content-center mt-4">
-    <button class="main-btn">View All Products</button>
+    <button [routerLink]="['/Products' , 'AllProducts']" class="main-btn">View All Products</button>
   </div>
 
 </section>

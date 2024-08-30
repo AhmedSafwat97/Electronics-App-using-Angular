@@ -12,6 +12,8 @@ export const routes: Routes = [
             {path: 'about', loadComponent: () => import('./Component/about/about.component').then(m => m.AboutComponent) , title: 'About'},
             {path: 'contact', loadComponent: () => import('./Component/contact/contact.component').then(m => m.ContactComponent) , title: 'Contact'},
             {path: 'product-details/:id', loadComponent: () => import('./Component/product-details/product-details.component').then(m => m.ProductDetailsComponent) , title: 'Product Details'},
+            {path: 'Products/:PathName', loadComponent: () => import('./Component/products-page/products-page.component').then(m => m.ProductsPageComponent) , title: 'Products'},
+
 
         
             {path: 'cart', 

@@ -12,25 +12,39 @@ export class ProductService {
   Token:string = `Bearer ${localStorage.getItem('token')}`
 
   CartItems : BehaviorSubject<any> = new BehaviorSubject(0);
-
-
-  GetAllProduct():Observable<any>{
-    return this._HttpClient.get('https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product?page=1&limit=8')
+  
+  GetAllProduct(Limit:number=8 , Page:number=1  ):Observable<any>{
+    return this._HttpClient
+    .get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product?page=${Page}&limit=${Limit}`)
   }
 
-  GetSaleProduct():Observable<any>{
-    return this._HttpClient.get('https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product/sale/discount')
+  filterProduct(name:any= null , categoryName:any = '' , brandName:any = null , maxPrice:any=null , minPrice:any=null ):Observable<any>{
+    return this._HttpClient
+    .get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product?name=${name}&categoryName=${categoryName}&brandName=${brandName}&maxPrice=${maxPrice}&minPrice=${minPrice}`)
   }
 
+  GetSaleProduct(Limit?:number , Page?:number):Observable<any>{
+    return this._HttpClient
+    .get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product/sale/discount?page=${Page ? Page : 1 }&limit=${Limit ? Limit : 8}`)
+  }
 
   GetBestseller():Observable<any>{
     return this._HttpClient.get('https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product/best/seller?limit=4')
   }
 
-
   GetAllCategories():Observable<any>{
     return this._HttpClient.get('https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/categories')
   }
+
+  GetCategoryBrand(CategoryID:string):Observable<any>{
+    return this._HttpClient.get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Categorybrands/${CategoryID}`)
+  }
+
+
+  GetAllBrands():Observable<any>{
+    return this._HttpClient.get('https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Brand')
+  }
+
 
   GetProductDetails(productId:any):Observable<any>{
     return this._HttpClient.get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Product/${productId}`)
@@ -65,8 +79,6 @@ export class ProductService {
     })
   }
 
-
-
   RemoveCartProducts(ProductId: any):Observable<any>{
     return this._HttpClient.delete(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Cart/` , {
 
@@ -78,7 +90,6 @@ export class ProductService {
 
     })
   }
-
 
   AddProductToFav(ProductId: any): Observable<any> {
     return this._HttpClient.post(
@@ -105,7 +116,6 @@ export class ProductService {
     );
   }
 
-
   GetFavProducts():Observable<any>{
     return this._HttpClient.get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Wishlist/` , {
 
@@ -116,7 +126,6 @@ export class ProductService {
 
     })
   }
-
 
 
 }

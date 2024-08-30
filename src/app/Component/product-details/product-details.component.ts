@@ -63,12 +63,7 @@ AddToFav(ProductId: string ): void {
     } })
 }
 
-
-
-
-
   ngOnInit(): void {
-    window.scrollTo(0, 0)
     // for the Product Details
     this._ProductService.GetProductDetails(this._ActivatedRoute.snapshot.paramMap.get('id')).subscribe({
       next: (response) => {

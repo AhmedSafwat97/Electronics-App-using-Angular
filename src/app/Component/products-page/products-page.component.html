@@ -1,0 +1,83 @@
+
+<section class="container my-3" > 
+    <p class="mb-3">Home / <span class="fw-bold">{{PathName}}</span></p>
+
+
+<div class="d-flex justify-content-center">
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="row gy-2 gx-3 align-items-center">
+        <div class="col-auto">
+          <div data-mdb-input-init class="form-outline">
+            <input formControlName="productName" type="text" class="form-control" placeholder="ProductName" />
+          </div>
+        </div>
+        <div class="col-auto">
+            <select [(ngModel)]="selectedBrand"
+            formControlName="selectedCategory" 
+            (change)="onCategoryChange($event)" 
+            class="select">
+            <option value="" disabled selected>Select a category</option>
+      <option *ngFor="let item of Category" [value]="item._id+':'+item.Name">{{ item.Name }}</option>
+    </select>
+        </div>
+        <div class="col-auto">
+            <select [(ngModel)]="selectedCategory" 
+            formControlName="selectedBrand" 
+            (change)="onCategoryChange($event)" 
+            class="select">
+            <option value="" disabled selected>Select a Brand</option>
+      <option *ngFor="let item of Brands" [value]="item.Name">{{ item.Name }}</option>
+    </select>
+        </div>
+        <div class="col-auto d-flex justify-content-center flex-wrap">
+          <div>
+            <div data-mdb-input-init class="form-outline">
+              <input formControlName="minPrice" type="text" class="form-control" placeholder="Min Price" />
+            </div>
+          </div>
+          <div>
+            <div data-mdb-input-init class="form-outline">
+              <input formControlName="maxPrice" type="text" class="form-control" placeholder="Max Price" />
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <button [disabled]="!filterForm.touched" data-mdb-ripple-init type="submit" class="main-btn">Submit</button>
+        </div>
+      </form>
+</div>
+
+</section>
+
+
+<section class="my-5 container">
+    <div class="mt-5">
+    <div class="d-flex flex-wrap justify-content-center align-items-center flex-wrap">
+      <!-- Product Cart -->
+      <div *ngFor="let Product of Products | paginate: 
+        { id: 'Products', 
+          itemsPerPage: pageSize, 
+          currentPage: CurrentPage, 
+          totalItems: total }; 
+        let i = index"
+        style="position: relative;">
+        <app-product-cart [Product]="Product" [i]="i"></app-product-cart>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="total > 0" class="d-flex justify-content-center mt-3">
+    <pagination-controls class="my-pagination" id="Products"
+      (pageChange)="pageChanged($event)"
+      (pageBoundsCorrection)="pageChanged($event)"
+      [maxSize]="9"
+      [directionLinks]="true"
+      [autoHide]="true"
+      [responsive]="true"
+      previousLabel="Previous"
+      nextLabel="Next"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
+  </div>
+</section>

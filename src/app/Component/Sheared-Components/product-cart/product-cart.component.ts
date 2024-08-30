@@ -58,57 +58,71 @@ export class ProductCartComponent  {
 
   AddToCart(ProductId: string , addToCart: any): void {
     this.Quantity++;
-    this._Renderer2.setAttribute(addToCart , 'disabled' , 'true')
-    this._ProductService.AddProductToCart(ProductId , this.Quantity ).subscribe({
-      next: (response) => {
-        this.toastr.success('Click to go to cart', response.message).onTap.subscribe(() => {
-          this._Router.navigate(['/cart']);});
-
-          if (response.message === 'Product added successfully') {
-            this._ProductService.CartItems.next(response.totalQuantity)
-
-            console.log(this._ProductService.CartItems);
+    if (localStorage.getItem('token')) {
+      this._Renderer2.setAttribute(addToCart , 'disabled' , 'true')
+      this._ProductService.AddProductToCart(ProductId , this.Quantity ).subscribe({
+        next: (response) => {
+          this.toastr.success('Click to go to cart', response.message).onTap.subscribe(() => {
+            this._Router.navigate(['/cart']);});
+  
+            if (response.message === 'Product added successfully') {
+              this._ProductService.CartItems.next(response.totalQuantity)
+  
+              console.log(this._ProductService.CartItems);
+            }
+  
+        },  error: (err) => {
+          if (err.message === 'Not authorized, token failed') {
+            this._Router.navigate(['/login'])
           }
-
-      },  error: (err) => {
-        if (err.message === 'Not authorized, token failed') {
-          this._Router.navigate(['/login'])
-        }
-      } })
+        } })
+    } else {
+      this._Router.navigate(['/login'])
+    }
   }
 
 
 
   AddToFav(ProductId: string ): void {
     this.Quantity++;
-    this._ProductService.AddProductToFav(ProductId).subscribe({
-      next: (response) => {
 
-        this.toastr.success('Click to go to wishlist', response.message).onTap.subscribe(() => {
-          this._Router.navigate(['/wishlist']);});
-        console.log(response);
+    if (localStorage.getItem('token')) {
+      this._ProductService.AddProductToFav(ProductId).subscribe({
+        next: (response) => {
+  
+          this.toastr.success('Click to go to wishlist', response.message).onTap.subscribe(() => {
+            this._Router.navigate(['/wishlist']);});
+          console.log(response);
+  
+  
+        },  error: (err) => {
+          if (err.message === 'Not authorized, token failed') {
+            this._Router.navigate(['/login'])
+          }
+        } })
+    } else {
+      this._Router.navigate(['/login'])
+    }
 
-
-      },  error: (err) => {
-        if (err.message === 'Not authorized, token failed') {
-          this._Router.navigate(['/login'])
-        }
-      } })
   }
 
 
   RemoveFromFav(ProductId: string ): void {
     this.Quantity++;
-    this._ProductService.RemoveProductFromFav(ProductId).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.toastr.error('Click to go to wishlist', response.message).onTap.subscribe(() => {
-          this._Router.navigate(['/wishlist']);});
-      },  error: (err) => {
-        if (err.message === 'Not authorized, token failed') {
-          this._Router.navigate(['/login'])
-        }
-      } })
+    if (localStorage.getItem('token')) {
+      this._ProductService.RemoveProductFromFav(ProductId).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.toastr.error('Click to go to wishlist', response.message).onTap.subscribe(() => {
+            this._Router.navigate(['/wishlist']);});
+        },  error: (err) => {
+          if (err.message === 'Not authorized, token failed') {
+            this._Router.navigate(['/login'])
+          }
+        } })
+    } else {
+      this._Router.navigate(['/login'])
+    }
   }
 
 

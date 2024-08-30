@@ -55,7 +55,7 @@
               >{{ Discount(Product.product.price, Product.product.PriceBeforeDiscount) }}%</span
             >
             <i
-              class="fa-solid fa-heart color-red "
+              class="fa-solid fa-trash" style="cursor: pointer; color: red;"
               (click)="RemoveFromFav(Product.product._id)"
             >
             </i>

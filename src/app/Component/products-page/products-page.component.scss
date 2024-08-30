@@ -1,0 +1,9 @@
+
+
+$MainColor: #EA4335;
+
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+    background: $MainColor;
+  }
+
