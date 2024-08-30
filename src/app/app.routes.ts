@@ -21,6 +21,10 @@ export const routes: Routes = [
                 canActivate: [authGuard],
                 loadComponent: () => import('./Component/wishlist/wishlist.component').then(m => m.WishlistComponent) , title: 'Wishlist'},
 
+                {path: 'paymentData/:id', 
+                    canActivate: [authGuard],
+                    loadComponent: () => import('./Component/payment-data/payment-data.component').then(m => m.PaymentDataComponent) , title: 'Payment Form'},
+    
         ]
     
     } ,   

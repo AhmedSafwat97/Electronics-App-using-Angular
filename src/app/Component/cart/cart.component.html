@@ -2,7 +2,7 @@
 <section class="container">
     <p class="text-muted mt-5">Home / Cart</p>
 <div class="container d-flex justify-content-center" >
-<table class="table mt-3" style="border: 1px solid black; width: 90%;">
+<table class="table mt-3" style="border: 1px solid black;">
   <thead>
     <tr>
       <!-- <th scope="col">#</th> -->
@@ -18,10 +18,12 @@
       <!-- <th scope="row">{{i+1}}</th> -->
       <td><img src="{{item.product.images[0]}}" width="50" alt=""> <span class="fw-bold">{{item.product.Name}}</span></td>
       <td>{{item.product.price}}</td>
-      <td>
+      <td >
+          <div class="quantity">
             <button #Increment (click)="DecrementQuantity(item , Increment)" class="main-btn" style="background-color: transparent; color: black; outline: 1px solid black;" >-</button>
             <span class="mx-2"> {{item.quantity}} </span>
             <button #Decrement (click)="IncrementQuantity(item , Decrement)" class="main-btn">+</button>
+          </div>
       </td>
       <td>{{item.product.price * item.quantity}}</td>
       <td style="width: 20px;"><span
@@ -32,11 +34,11 @@
       <td style="width: 100px;"  class="fw-bold">{{TotalPrice}} EGP</td>
     </tr>
   </tbody>
-
-  <button class="main-btn my-2 mx-2" style="background-color: transparent; color: #EA4335; outline: 1px solid #EA4335; ">Back To Shop</button>
 </table>
+
 </div>
 
+<button class="main-btn my-2 mx-2" style="background-color: transparent; color: #EA4335; outline: 1px solid #EA4335; ">Back To Shop</button>
 
 
 </section>
@@ -60,6 +62,7 @@
 
     </div>
     <div class="col-12 col-lg-5">
+      
 <div class="Total-cart">
     <h5 class="fw-bold mb-2">Cart Total</h5>
 
@@ -83,7 +86,7 @@
 
 
 <div class="d-flex justify-content-center align-items-center">
-    <button class="main-btn">Proceed To Checkout</button>
+    <button [disabled]="CartProducts.length < 1"  [routerLink]="['/paymentData' , cartId]" routerLinkActive="router-link-active"  class="main-btn">Proceed To Checkout</button>
 </div>
 
 </div>

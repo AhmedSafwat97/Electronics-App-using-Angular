@@ -26,7 +26,9 @@
                 <h2 class="mb-2">Create an account</h2>
                 <p>Enter your details below</p>
               </div>
-              <div>{{ErrorMessage | json}}</div>
+              <div class="d-flex justify-content-center align-items-center">
+                <span *ngIf="ErrorMessage != ''">{{ErrorMessage | json}}</span>
+              </div>
               <!-- Signup Form -->
               <form [formGroup]="register" (ngSubmit)="onSubmit()" >
              <!-- Name Inputs -->
@@ -109,6 +111,7 @@
         <li>At least one special character (e.g., !&#64;#$%^&*)
         </li>
       </ul>
+      <p *ngIf="register.get('password')?.errors?.['required']" >Please Enter your password</p>
     </div>
   </div>
 
@@ -145,7 +148,7 @@
   <!-- Submit Button -->
   <button [disabled]="register.invalid" type="submit" class="main-btn mb-4 w-100">
     Sign up
-  <i *ngIf="IsLoading" class="fas fa-spinner fa-spin"></i>
+    <i *ngIf="IsLoading" class="fas fa-spinner fa-spin"></i>
   </button>
 
                 <!-- Login Link -->

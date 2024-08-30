@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
   CartProducts:any[] = []
   TotalPrice: number = 0
   Quantity:number = 1
+  cartId: string = ''
   removeFromTheCart(ProductId: string): void {
 
     this._ProductService.RemoveCartProducts(ProductId).subscribe({
@@ -72,9 +73,9 @@ export class CartComponent implements OnInit {
 
     this._ProductService.GetCartProducts().subscribe({
       next: (response) => {
-        console.log(response.data);
         this.CartProducts = response.data.items
         this.TotalPrice = response.totalPrice
+        this.cartId = response.data._id
       },
       error: (err) => {
         console.log(err);

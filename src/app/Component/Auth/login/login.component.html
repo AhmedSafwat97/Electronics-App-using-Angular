@@ -17,7 +17,9 @@
                 <h2 class="mb-2">Log in to Exclusive</h2>
                 <p>Enter your details below</p>
               </div>
-              <div>{{ErrorMessage | json}}</div>
+              <div class="d-flex justify-content-center align-items-center">
+                <span *ngIf="ErrorMessage != ''">{{ErrorMessage | json}}</span>
+              </div>
               <form [formGroup]="login" (ngSubmit)="OnSubmit()">
                 <!-- Email input -->
                 <div class="form-outline mb-4">

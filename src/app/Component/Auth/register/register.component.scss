@@ -1,6 +1,16 @@
+$MainColor: #EA4335;
+
+
 .bg-error{
 
     background-color: #EEE;
     padding: 3px;
 
 }
+
+
+.form-control{
+    border : none !important;
+    border-bottom: 1px solid $MainColor !important;
+    border-radius: 0 !important;
+ }

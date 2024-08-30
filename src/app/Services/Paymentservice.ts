@@ -11,22 +11,15 @@ export class PaymentService {
   Token:string = `Bearer ${localStorage.getItem('token')}`
 
 
-  MakePayment(CartId: any, Quantity: Number): Observable<any> {
+  MakePayment(CartId: any, Data : object): Observable<any> {
     return this._HttpClient.post(
       `https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/paymob/${CartId}`,
-      {}, // The body is empty
+      Data , // The body is empty
       {
         headers: new HttpHeaders({
           Authorization: this.Token,
-          productid: ProductId,
-          quantity: Quantity.toString() // Ensure quantity is a string, as headers expect string values
         })
       }
     );
   }
-
-
-
-
-
 }
