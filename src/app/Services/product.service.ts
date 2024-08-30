@@ -135,4 +135,16 @@ export class ProductService {
   }
 
 
+
+  GetOrdersProducts():Observable<any>{
+    return this._HttpClient.get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Cart/ConfirmedOders` , {
+
+      headers: new HttpHeaders({
+        Authorization: this.Token,
+      })
+
+
+    })
+  }
+
 }

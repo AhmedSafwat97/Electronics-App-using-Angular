@@ -93,6 +93,7 @@ right: 0;
     max-height: 300px;
     overflow: hidden;
     margin: 10px 10px;
+    cursor: pointer;
 
     &:hover .ToCart {
         display: flex;
@@ -112,6 +113,14 @@ right: 0;
     &.active {
       color: red;
     }
+
+    &:hover{
+      color: red;
+      
+    }
+
+
+
   }
 
   .fa-solid.fa-heart.color-red {
