@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { AuthService } from '../../../Services/auth.service';
 })
 export class LoginComponent {
 
-  constructor(private _FormBuilder: FormBuilder , private _AuthService: AuthService , private Router:Router) {
+  constructor(private _FormBuilder: FormBuilder , private _spinner: SpinnerService , private _AuthService: AuthService , private Router:Router) {
   }
 
   IsLoading:boolean = false;
@@ -26,6 +27,7 @@ export class LoginComponent {
   })
 
   OnSubmit(){
+    this._spinner.show();
     this._AuthService.SetLogin(this.login.value).subscribe({
       next : (response) => { 
         console.log(response);
@@ -34,12 +36,14 @@ export class LoginComponent {
           localStorage.setItem('token' , response.token)
           this.IsLoading = true;
           this.Router.navigate(['/home'])
+          response ? this._spinner.hide() : this._spinner.show()
         }
 
       },
       error : (err) => {
         console.log(err);
         this.ErrorMessage = err.error.message;
+        this._spinner.hide();
         
       } 
     })

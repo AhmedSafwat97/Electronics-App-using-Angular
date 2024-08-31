@@ -3,6 +3,8 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { Product } from '../../Sheared/Interfaces/product';
+import { Spinner } from 'ngx-spinner';
+import { SpinnerService } from '../../Services/spinner.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,14 +16,15 @@ import { Product } from '../../Sheared/Interfaces/product';
 export class CartComponent implements OnInit {
 
 
-  constructor(private _ProductService: ProductService , private _Renderer2:Renderer2 , private _Router:Router) { }   
+  constructor(private _ProductService: ProductService , 
+    private _Renderer2:Renderer2 , private _Router:Router ,private _Spinner: SpinnerService) { }   
 
   CartProducts:any[] = []
   TotalPrice: number = 0
   Quantity:number = 1
   cartId: string = ''
   removeFromTheCart(ProductId: string): void {
-
+      this._Spinner.show()
     this._ProductService.RemoveCartProducts(ProductId).subscribe({
       next: (response) => {
 
@@ -29,14 +32,11 @@ export class CartComponent implements OnInit {
           this.CartProducts = response.data.items;
           this.TotalPrice = response.totalPrice
           this._ProductService.CartItems.next(this.CartProducts.length)
+          response? this._Spinner.hide() : this._Spinner.show()
         }
-
         if (this.CartProducts.length === 0) {
           this._Router.navigate(['/home'])
         }
-
-
-
       },
       error: (err) => {
         console.log(err);
@@ -70,12 +70,14 @@ export class CartComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this._Spinner.show()
 
     this._ProductService.GetCartProducts().subscribe({
       next: (response) => {
         this.CartProducts = response.data.items
         this.TotalPrice = response.totalPrice
         this.cartId = response.data._id
+        response ? this._Spinner.hide() : this._Spinner.show()
       },
       error: (err) => {
         console.log(err);

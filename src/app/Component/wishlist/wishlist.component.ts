@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProductCartComponent } from '../Sheared-Components/product-cart/product-cart.component';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { SpinnerService } from '../../Services/spinner.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -16,18 +17,19 @@ export class WishlistComponent {
 
   constructor(private _ProductService: ProductService ,
     private _Router: Router , 
-    private _Renderer2:Renderer2 , private toastr: ToastrService) { }
+    private _Renderer2:Renderer2 , private toastr: ToastrService , private _Spinner: SpinnerService) { }
 
   Wishlist:any[] = []
   Quantity: number = 0;
 
 
   ngOnInit(): void {
-
+    this._Spinner.show()
     this._ProductService.GetFavProducts().subscribe({
       next: (response) => {
         this.Wishlist = response.data.items
         console.log(this.Wishlist);
+        this._Spinner.hide()
       },
       error: (err) => {
         console.log(err);
@@ -70,10 +72,12 @@ export class WishlistComponent {
 
 
   RemoveFromFav(ProductId: string ): void {
+
+this._Spinner.show()
     this._ProductService.RemoveProductFromFav(ProductId).subscribe({
       next: (response) => {
         this.Wishlist = response.data.items
-
+        response ? this._Spinner.hide() : this._Spinner.hide()
         if (this.Wishlist.length === 0) {
           this._Router.navigate(['/home'])
         }

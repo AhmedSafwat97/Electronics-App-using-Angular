@@ -113,7 +113,7 @@ export class ProductCartComponent  {
       this._ProductService.RemoveProductFromFav(ProductId).subscribe({
         next: (response) => {
           console.log(response);
-          this.toastr.error('Click to go to wishlist', response.message).onTap.subscribe(() => {
+          this.toastr.success('Click to go to wishlist', response.message).onTap.subscribe(() => {
             this._Router.navigate(['/wishlist']);});
         },  error: (err) => {
           if (err.message === 'Not authorized, token failed') {

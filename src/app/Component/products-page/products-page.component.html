@@ -1,5 +1,6 @@
 
-<section class="container my-3" > 
+<div id="scrollTarget">
+  <section class="container my-3" > 
     <p class="mb-3">Home / <span class="fw-bold">{{PathName}}</span></p>
 
 
@@ -47,10 +48,9 @@
 </div>
 
 </section>
-
-
 <section class="my-5 container">
-    <div class="mt-5">
+<div *ngIf="Products.length > 0 ; else noProducts">
+  <div class="mt-5">
     <div class="d-flex flex-wrap justify-content-center align-items-center flex-wrap">
       <!-- Product Cart -->
       <div *ngFor="let Product of Products | paginate: 
@@ -80,4 +80,15 @@
       screenReaderCurrentLabel="You're on page">
     </pagination-controls>
   </div>
+</div>
+
+
+<ng-template #noProducts>
+  <div class="container d-flex justify-content-center align-items-center" style="flex-direction: column;">
+    <h5 class="text-muted mt-5">No Products Found</h5>
+    <button routerLink="/home" class="main-btn my-2 mx-2" style="background-color: transparent; color: #EA4335; outline: 1px solid #EA4335; ">Back To Home</button>
+  </div>
+</ng-template>
+
 </section>
+</div>

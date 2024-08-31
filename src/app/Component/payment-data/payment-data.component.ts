@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { PaymentService } from '../../Services/Paymentservice';
+import { SpinnerService } from '../../Services/spinner.service';
 
 @Component({
   selector: 'app-payment-data',
@@ -14,7 +15,7 @@ import { PaymentService } from '../../Services/Paymentservice';
 })
 export class PaymentDataComponent {
 
-  constructor(private _FormBuilder:FormBuilder , private _ProductService:ProductService , private _PaymentServices:PaymentService){}
+  constructor ( private _spinner: SpinnerService ,private _FormBuilder:FormBuilder , private _ProductService:ProductService , private _PaymentServices:PaymentService){}
 
   CartProducts:any[] = []
   TotalPrice: number = 0
@@ -32,7 +33,7 @@ export class PaymentDataComponent {
 
 
 onSubmit(){
-  console.log(this.BillingDetails.value);
+
 
   this.IsLoading = true
 
@@ -42,7 +43,6 @@ onSubmit(){
       if (response.status === 'Success') { 
         window.open(response.paymentLink , '_self')
         this.IsLoading = false
-
       }
     },
     error: (err) => {
@@ -54,12 +54,15 @@ onSubmit(){
 }
 
 ngOnInit(): void {
+  this._spinner.show()
 
   this._ProductService.GetCartProducts().subscribe({
     next: (response) => {
       this.CartProducts = response.data.items
       this.TotalPrice = response.totalPrice
       this.cartId = response.data._id
+      response ? this._spinner.hide() : this._spinner.show()
+
     },
     error: (err) => {
       console.log(err);

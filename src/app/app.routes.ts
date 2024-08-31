@@ -14,10 +14,9 @@ export const routes: Routes = [
             {path: 'product-details/:id', loadComponent: () => import('./Component/product-details/product-details.component').then(m => m.ProductDetailsComponent) , title: 'Product Details'},
             {path: 'Products/:PathName', loadComponent: () => import('./Component/products-page/products-page.component').then(m => m.ProductsPageComponent) , title: 'Products'},
             {path: 'category/:Name', loadComponent: () => import('./Component/catygory-page/category').then(m => m.CatygoryPageComponent) , title: 'Category'},
-            {path: 'ConfirmedOrders', loadComponent: () => import('./Component/all-orders/all-orders.component').then(m => m.AllOrdersComponent) , title: 'My Orders'},
-
-
-            
+            {path: 'ConfirmedOrders', 
+                canActivate: [authGuard],
+                loadComponent: () => import('./Component/all-orders/all-orders.component').then(m => m.AllOrdersComponent) , title: 'My Orders'},
             {path: 'cart', 
                 canActivate: [authGuard],
                 loadComponent: () => import('./Component/cart/cart.component').then(m => m.CartComponent) , title: 'Cart'},

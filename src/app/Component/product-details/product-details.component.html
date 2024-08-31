@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" id="scrollTarget">
 <!-- The Main Section -->
     <section class="my-5">
 
@@ -59,10 +59,12 @@
 <div class="mt-5" >
     <div class="d-flex flex-wrap justify-content-center align-items-center flex-wrap">
             <!-- Product Cart -->
-            <div *ngFor="let Product of relatedProducts ; let i = index" style="position: relative;">
+            <div  *ngFor="let Product of relatedProducts ; let i = index" style="position: relative;">
                 
-                <app-product-cart [Product]="Product" [i] = "i" ></app-product-cart>
+       <div (click)="goTop()">
+        <app-product-cart [Product]="Product" [i] = "i" ></app-product-cart>
 
+       </div>
               </div>
     </div>
 </div>

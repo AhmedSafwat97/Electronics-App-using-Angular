@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ import { AuthService } from '../../../Services/auth.service';
 })
 export class RegisterComponent {
 
-  constructor(private _FormBuilder: FormBuilder , private _AuthService: AuthService , private Router:Router) {
+  constructor(private _FormBuilder: FormBuilder , private _AuthService: AuthService , private Router:Router ,  private _spinner: SpinnerService) {
   }
 
 
@@ -42,16 +43,22 @@ export class RegisterComponent {
 
 
   onSubmit() {
+
+    this._spinner.show();
+
     this._AuthService.SetRegister(this.register.value).subscribe({
       next: (response) => {
         if (response.message === 'user created successfully') {
           this.IsLoading = true;
           this.Router.navigate(['/login']);
+          response ? this._spinner.hide() : this._spinner.show();
         }
 
       },
       error: (err) => { 
         this.ErrorMessage = err.error.message;
+
+        this._spinner.hide();
       }
     });
   }

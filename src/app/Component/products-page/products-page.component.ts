@@ -1,3 +1,4 @@
+import { Spinner } from 'ngx-spinner';
 import { Category } from './../../Sheared/Interfaces/product';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -10,6 +11,8 @@ import { Product } from '../../Sheared/Interfaces/product';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Brand } from '../../Sheared/brand';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpinnerService } from '../../Services/spinner.service';
+import { ScrollService } from '../../Services/scroll.service';
 
 @Component({
   selector: 'app-products-page',
@@ -29,7 +32,10 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 })
 export class ProductsPageComponent implements OnInit {
 
-  constructor(private _formBuilder:FormBuilder ,private _ActivatedRoute: ActivatedRoute , private _ProductService: ProductService) { }
+  constructor(
+    private _Spinner: SpinnerService ,
+    private _ScrollService : ScrollService ,
+    private _formBuilder:FormBuilder ,private _ActivatedRoute: ActivatedRoute , private _ProductService: ProductService) { }
 
   Products:Product[] = []
   pageSize: number = 12
@@ -61,7 +67,6 @@ export class ProductsPageComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue = selectElement.value;
     const [id, name] = selectedValue.split(':');
-
     this.CId = id
     this.CName = name
     this._ProductService.GetCategoryBrand(id).subscribe({
@@ -79,6 +84,8 @@ export class ProductsPageComponent implements OnInit {
 
   onSubmit() {
 
+
+this._Spinner.show();
     this._ProductService.filterProduct(this.filterForm.value.productName , this.CName ,this.filterForm.value.selectedBrand , this.filterForm.value.maxPrice , this.filterForm.value.minPrice).subscribe({
       next: (response) => {
         this.Products = response.data
@@ -87,6 +94,7 @@ export class ProductsPageComponent implements OnInit {
         this.total = response.TotalProducts
         this.CName = ''
         this.filterForm.value.selectedBrand = ''
+        response ? this._Spinner.hide() : this._Spinner.hide()
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -96,12 +104,10 @@ export class ProductsPageComponent implements OnInit {
 
   }
 
-
-
-
-
-
   pageChanged(event: any) {
+
+    this._Spinner.show()
+
     if (this.PathName == "AllProducts") {
       
       this._ProductService.GetAllProduct(this.pageLimit , event).subscribe({
@@ -110,6 +116,10 @@ export class ProductsPageComponent implements OnInit {
           this.pageSize = this.pageLimit
           this.CurrentPage = response.PageNumber
           this.total = response.TotalProducts
+          response ? this._Spinner.hide() : this._Spinner.hide()
+          setTimeout(() => this._ScrollService.scrollToElement('scrollTarget'), 0);   
+
+
         },
         error: (err) => {
           console.error('Error fetching products:', err);
@@ -125,6 +135,10 @@ export class ProductsPageComponent implements OnInit {
           this.pageSize = this.pageLimit
           this.CurrentPage = response.PageNumber
           this.total = response.TotalProducts
+          response ? this._Spinner.hide() : this._Spinner.hide()
+          setTimeout(() => this._ScrollService.scrollToElement('scrollTarget'), 0);   
+
+
         },
         error: (err) => {
           console.error('Error fetching products:', err);
@@ -138,6 +152,8 @@ export class ProductsPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this._Spinner.show();
+
 //  for categories
     this._ProductService.GetAllCategories().subscribe({
       next: (response) => {
@@ -150,13 +166,16 @@ export class ProductsPageComponent implements OnInit {
 
 
     if (this.PathName == "AllProducts") {
-      
+
       this._ProductService.GetAllProduct().subscribe({
         next: (response) => {
           this.Products = response.data
           this.pageSize = this.pageLimit
           this.CurrentPage = response.PageNumber
           this.total = response.TotalProducts
+          this._Spinner.hide();
+          setTimeout(() => this._ScrollService.scrollToElement('scrollTarget'), 0);   
+
         },
         error: (err) => {
           console.error('Error fetching products:', err);
@@ -172,6 +191,9 @@ export class ProductsPageComponent implements OnInit {
           this.pageSize = this.pageLimit
           this.CurrentPage = response.PageNumber
           this.total = response.TotalProducts
+          this._Spinner.hide();
+          setTimeout(() => this._ScrollService.scrollToElement('scrollTarget'), 0);   
+
         },
         error: (err) => {
           console.error('Error fetching products:', err);

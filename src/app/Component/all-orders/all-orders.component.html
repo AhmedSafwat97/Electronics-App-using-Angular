@@ -37,10 +37,15 @@
 
 <ng-template #noOrders>
 
-    <div class="container d-flex justify-content-center align-items-center">
-        <h5 class="text-muted mt-5">No Orders Found</h5>
-        <button routerLink="/Home" class="main-btn my-2 mx-2" style="background-color: transparent; color: #EA4335; outline: 1px solid #EA4335; ">Back To Shop</button>
+    <div class="container d-flex" style="flex-direction: column;">
+        <div style="margin: 40px auto;">
+          <h5 class="text-muted my-2">No Orders Found</h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <button routerLink="/Home" class="main-btn">Back To Shop</button>
+          </div>
+        </div>
     </div>
+
 </ng-template>
 
 

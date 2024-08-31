@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule, RouterLinkActive, Router } from '@angular/router';
 import { ProductService } from '../../../Services/product.service';
+import { SpinnerService } from '../../../Services/spinner.service';
 
 @Component({
   selector: 'app-navbar-general',
@@ -13,7 +14,7 @@ import { ProductService } from '../../../Services/product.service';
 export class NavbarGeneralComponent implements OnInit { // Corrected syntax
 
 
-  constructor(private router:Router , private _ProductService: ProductService) { }
+  constructor(private router:Router , private _ProductService: ProductService ,  private _spinner: SpinnerService) { }
   loginUser: boolean = false;
   OpenDropDown: boolean = false;
   CartCount: number = 0;
@@ -34,8 +35,10 @@ export class NavbarGeneralComponent implements OnInit { // Corrected syntax
 
 
   logout() {
+    this._spinner.show();
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+    localStorage.getItem('token') == null? this._spinner.hide() : this._spinner.show();
     this.isLogin();
   }
 
