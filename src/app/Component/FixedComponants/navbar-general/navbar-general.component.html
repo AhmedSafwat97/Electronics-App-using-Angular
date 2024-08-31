@@ -92,6 +92,9 @@
                 type="search"
                 placeholder="What are you looking for?"
                 aria-label="Search"
+                [(ngModel)]="searchInput"
+                name="search" 
+                (keydown.Enter)="OnSearch()"
               />
               <button class="search-btn" type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i>

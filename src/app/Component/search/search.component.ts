@@ -1,0 +1,166 @@
+import { Spinner } from 'ngx-spinner';
+import { Category } from './../../Sheared/Interfaces/product';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ProductService } from '../../Services/product.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ProductCartComponent } from '../Sheared-Components/product-cart/product-cart.component';
+import { Product } from '../../Sheared/Interfaces/product';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Brand } from '../../Sheared/brand';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpinnerService } from '../../Services/spinner.service';
+import { ScrollService } from '../../Services/scroll.service';
+@Component({
+  selector: 'app-search',
+  standalone: true,
+  imports: [    CommonModule,
+    RouterModule,
+    HttpClientModule,
+    CarouselModule,
+    ProductCartComponent , 
+    NgxPaginationModule,
+    FormsModule ,
+    ReactiveFormsModule],
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.scss'
+})
+export class SearchComponent {
+  constructor(
+    private _Spinner: SpinnerService ,
+    private _ScrollService : ScrollService ,
+    private _formBuilder:FormBuilder ,private _ActivatedRoute: ActivatedRoute , private _ProductService: ProductService) { }
+
+  Products:Product[] = []
+  pageSize: number = 12
+  CurrentPage: number = 1
+  total: number = 20
+  pageLimit: number = 8
+  pageName:string = "AllProducts"
+  Brands:Brand[] = []
+  Category:any[] = []
+  selectedCategory: string = ''; // Variable to hold the selected value
+  selectedBrand: string = ''; // Variable to hold the selected value
+
+  CId:string = '';
+  CName:string = '';
+
+
+  filterForm : FormGroup = this._formBuilder.group({
+    productName: [''],
+    selectedCategory: [''],
+    selectedBrand: [''],
+    minPrice: [''],
+    maxPrice: ['']
+  });
+
+
+  PathName?:any = this._ActivatedRoute.snapshot.paramMap.get('PathName') 
+
+  onCategoryChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+    const [id, name] = selectedValue.split(':');
+    this.CId = id
+    this.CName = name
+    this._ProductService.GetCategoryBrand(id).subscribe({
+      next: (response) => {
+        this.Brands = response
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      }
+    })
+
+  }
+
+
+
+  onSubmit() {
+
+
+this._Spinner.show();
+    this._ProductService.filterProduct(this.filterForm.value.productName , this.CName ,this.filterForm.value.selectedBrand , this.filterForm.value.maxPrice , this.filterForm.value.minPrice).subscribe({
+      next: (response) => {
+        this.Products = response.data
+        this.pageSize = this.pageLimit
+        this.CurrentPage = response.PageNumber
+        this.total = response.TotalProducts
+        this.CName = ''
+        this.filterForm.value.selectedBrand = ''
+        response ? this._Spinner.hide() : this._Spinner.hide()
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      }
+    });
+
+
+  }
+
+  pageChanged(event: any) {
+
+    this._Spinner.show()
+    this._ProductService.GetAllProduct(this.pageLimit , event).subscribe({
+      next: (response) => {
+        this.Products = response.data
+        this.pageSize = this.pageLimit
+        this.CurrentPage = response.PageNumber
+        this.total = response.TotalProducts
+        response ? this._Spinner.hide() : this._Spinner.hide()
+        setTimeout(() => this._ScrollService.scrollToElement('scrollTarget'), 0);   
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      }
+    }
+  
+  
+  
+  
+  );
+    
+  }
+
+  ngOnInit(): void {
+
+    this._Spinner.show();
+
+//  for categories
+    this._ProductService.GetAllCategories().subscribe({
+      next: (response) => {
+        this.Category = response.data
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      }
+    })
+
+    this._ActivatedRoute.params.subscribe(params => {
+      this._ProductService.SearchProducts(params['target']).subscribe({
+        next: (response) => {
+          this.Products = response.data
+          this.pageSize = this.pageLimit
+          this.CurrentPage = response.PageNumber
+          this.total = response.TotalProducts
+          this._Spinner.hide();
+          setTimeout(() => this._ScrollService.scrollToElement('scrollTarget'), 0);   
+          
+        },
+        error: (err) => {
+          console.error('Error fetching products:', err);
+        }
+      });
+    })
+
+
+
+
+
+
+    }
+
+
+}

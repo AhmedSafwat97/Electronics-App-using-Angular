@@ -3,11 +3,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule, RouterLinkActive, Router } from '@angular/router';
 import { ProductService } from '../../../Services/product.service';
 import { SpinnerService } from '../../../Services/spinner.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar-general',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterLinkActive],
+  imports: [CommonModule, RouterModule, RouterLinkActive , FormsModule],
   templateUrl: './navbar-general.component.html',
   styleUrls: ['./navbar-general.component.scss'] // Corrected to styleUrls and made it an array
 })
@@ -18,10 +19,17 @@ export class NavbarGeneralComponent implements OnInit { // Corrected syntax
   loginUser: boolean = false;
   OpenDropDown: boolean = false;
   CartCount: number = 0;
+  searchInput: string = '';
 
   IsOpen() { 
       this.loginUser = false ? this.OpenDropDown = true : this.OpenDropDown = false;
   }
+
+
+  OnSearch() {
+    this.router.navigate(['/Search', this.searchInput]);
+  }
+
 
 
   isLogin() { // Corrected method placement and added 'this'
