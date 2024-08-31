@@ -19,7 +19,7 @@ export class LoginComponent {
 
   IsLoading:boolean = false;
   ErrorMessage:string = '';
-
+  
 
   login : FormGroup = this._FormBuilder.group({
     Email : ['' , [Validators.required , Validators.email]],

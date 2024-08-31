@@ -47,6 +47,7 @@
                 <a class="nav-link" aria-current="page">Contact</a>
               </li>
               <li
+              *ngIf="!loginUser"
                 class="nav-route"
                 routerLinkActive="active-Link"
                 routerLink="/login"
@@ -101,17 +102,18 @@
 
         <!-- The Icon Of the navbar -->
           <div class="col-12 col-lg-4 d-flex-center Pointer d-flex mt-2 mt-lg-0">
-       <div routerLink="/cart" *ngIf="CartCount > 0" style="position: relative" >
+       <div routerLink="/cart"  style="position: relative" >
         <svg class="w-10 h-10 text-gray-800 dark:text-white pointer"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="37" height="37" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
           </svg>
-          <span class="badge badge-Color">{{CartCount}}</span>
+          <span *ngIf="CartCount > 0 && loginUser" class="badge badge-Color">{{CartCount}}</span>
        </div>
           <div routerLink="/wishlist">    
             <svg class="w-6 h-6 text-gray-800 dark:text-white"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
           </svg>
         </div>
+
         <div *ngIf="loginUser" class="dropdown d-none d-lg-block">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#EA4335" viewBox="0 0 24 24">
