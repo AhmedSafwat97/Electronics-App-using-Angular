@@ -27,7 +27,6 @@ export class ProductDetailsComponent implements OnInit { // Implements OnInit to
   Product: Product = {} as Product;
   relatedProducts: Product[] = [];
 
-
   goTop(): void {
     this._spinner.show();
     setTimeout(() => this._ScrollService.scrollToElement('scrollTarget'), 0);   
@@ -44,6 +43,7 @@ export class ProductDetailsComponent implements OnInit { // Implements OnInit to
   }
 
 
+
   quantity: number = 1; 
   increaseQuantity(): void {
     this.quantity++;
@@ -55,18 +55,25 @@ export class ProductDetailsComponent implements OnInit { // Implements OnInit to
   }
 
   AddToCart(ProductId: string ): void {
- 
-    this._ProductService.AddProductToCart(ProductId , this.quantity ).subscribe({
-      next: (response) => {
-        this.toastr.success('Click to go to cart', response.message).onTap.subscribe(() => {
-          this._Router.navigate(['/cart']);});
-      } , error: (err) => {
-        if (err.message === 'Not authorized, token failed') {
-          this._Router.navigate(['/login'])
+
+    if (!localStorage.getItem("token")) {
+      this._Router.navigate(['/login'])
+    } else {
+
+      this._ProductService.AddProductToCart(ProductId , this.quantity ).subscribe({
+        next: (response) => {
+          this.toastr.success('Click to go to cart', response.message).onTap.subscribe(() => {
+            this._Router.navigate(['/cart']);});
+        } , error: (err) => {
+          if (err.message === 'Not authorized, token failed') {
+            this._Router.navigate(['/login'])
+          }
         }
-      }
-      })
-  
+        })
+    
+    }
+
+ 
 }
 
   AddToFav(ProductId: string ): void {

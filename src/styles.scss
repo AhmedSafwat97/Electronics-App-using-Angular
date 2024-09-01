@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import 'ngx-toastr/toastr';
 
 $MainColor: #EA4335;
 $main-transition: all 0.5s ease-in-out;
@@ -35,10 +34,6 @@ right: 0;
    gap: 5px;
 }
 
-.Pointer {
-    cursor: pointer;
-}
-
 
 
 .rating {
@@ -71,14 +66,12 @@ right: 0;
 
 .ToCart {
     display: none;
-    transition: display 2s ;
     position: absolute;
     top: 65%;
     left: 65%;
     transform: translate(-65%,-65%);
     cursor: pointer;
     width: 100%;
- 
 }  
 
 .carWidth{
@@ -105,35 +98,26 @@ right: 0;
 
 
 .fa-solid.fa-heart {
-    color:  #f9d1d1;
-    font-size: 24px;
-    cursor: pointer;
-    transition: color 0.3s;
-  
-    &.active {
-      color: red;
-    }
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: #f9d1d1;
 
-    &:hover{
-      color: red;
-      
-    }
-
-
-
+  &.active {
+    color: red;
   }
 
-  .fa-solid.fa-heart.color-red {
-    color:  red;
-    font-size: 24px;
-    cursor: pointer;
-    transition: color 0.3s;
-  
+  &:hover {
+    color: red;
+  }
+
+  &.color-red {
+    color: red;
     &.active {
       color: #f9d1d1;
     }
   }
-
+}
 
 .product-img{
     width: 100%;
@@ -147,9 +131,6 @@ right: 0;
     margin: 0 5px;
     padding: 5px;
 
-    &:hover{
-        border: 3pxx solid black;
-    }
 
 
 }
@@ -187,10 +168,7 @@ right: 0;
 }
 
 .Pointer{
-
   cursor: pointer;
-
-
 }
 .active-Link{
 font-weight: 700;

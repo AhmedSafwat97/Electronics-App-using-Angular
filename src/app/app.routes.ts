@@ -43,7 +43,7 @@ export const routes: Routes = [
     } ,   
 {
     path: '',
-    canActivate: [loginGuard],
+    // canActivate: [loginGuard],
     loadComponent: () => import('./Layouts/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
         {path : '' , redirectTo : "login" , pathMatch : "full"} ,
