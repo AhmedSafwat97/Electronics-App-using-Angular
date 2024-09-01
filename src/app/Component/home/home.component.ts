@@ -85,9 +85,9 @@ export class HomeComponent implements OnInit {
     }
   }
   slidesStore: any[] = [
-    { src: 'https://res-console.cloudinary.com/drkevmgk2/media_explorer_thumbnails/75cb71b9b0376518ea6132e07dd89962/detailed' },
-    { src: 'https://res-console.cloudinary.com/drkevmgk2/media_explorer_thumbnails/dc3fd6c8176eee5be0c6e857a329ff63/detailed' },
-    { src: 'https://res-console.cloudinary.com/drkevmgk2/media_explorer_thumbnails/1552ed9b809ef5e20bfae68d304d53eb/detailed' },
+    { src: '../../../assets/bannars/1.jpeg' },
+    { src: '../../../assets/bannars/2.jpeg' },
+    { src: '../../../assets/bannars/3.jpeg' },
   ]
   
 
