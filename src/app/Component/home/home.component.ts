@@ -85,9 +85,9 @@ export class HomeComponent implements OnInit {
     }
   }
   slidesStore: any[] = [
-    { src: '../../../assets/bannars/1.jpeg' },
-    { src: '../../../assets/bannars/2.jpeg' },
-    { src: '../../../assets/bannars/3.jpeg' },
+    { src: './assets/bannars/1.jpeg' },
+    { src: './assets/bannars/2.jpeg' },
+    { src: './assets/bannars/3.jpeg' },
   ]
   
 
