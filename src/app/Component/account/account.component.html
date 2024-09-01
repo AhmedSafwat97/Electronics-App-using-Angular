@@ -1,0 +1,85 @@
+
+<section class="container">
+    <p class="text-muted mt-5">Home / <span class="fw-bold">Account</span></p>
+</section>
+
+<section class="container">
+    <div class="row">
+        <div class="col-12 col-lg-2" >
+
+            <div>
+                <h5>Manage Account</h5>
+                <h6 class="text-muted Pointer">My Profile</h6>
+                <h6 class="text-muted Pointer">Address Book</h6>
+                <h6 class="text-muted Pointer">My Payment Options</h6>
+            </div>
+            <hr>
+            <div>
+                <h5>My Orders</h5>
+                <h6 routerLink="/ConfirmedOrders" class="text-muted Pointer">Confirmed Orders</h6>
+                <h6 routerLink="/cart" class="text-muted Pointer">MY Cart</h6>
+            </div>
+            <hr>
+            <div>
+                <h5>Wishlist</h5>
+                <h6 routerLink="/wishlist" class="text-muted Pointer">My WishList</h6>
+            </div>
+
+        </div>
+
+<dir class="col-0 col-lg-1"></dir>
+
+        <div class="col-12 col-lg-9">
+            <h5>Edit Your Profile</h5>
+            <form class="mt-4">
+                <div class="row mb-4">
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <label class="form-label" for="form6Example1">First name</label>
+                            <input type="text" id="form6Example1" class="form-control" [placeholder]="userData.FName" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <label class="form-label" for="form6Example2">Last name</label>
+                            <input type="text" id="form6Example2" class="form-control"[placeholder]="userData.LName" />
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row mb-4">
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <label class="form-label" for="form6Example3">Email</label>
+                            <input type="email" id="form6Example3" class="form-control" [placeholder]="userData.Email" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div data-mdb-input-init class="form-outline">
+                            <label class="form-label" for="form6Example4">Phone</label>
+                            <input type="text" id="form6Example4" class="form-control" [placeholder]="userData.Phone" />
+                        </div>
+                    </div>
+                </div>
+            
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <label class="form-label" for="form6Example5">Password Changes</label>
+                    <input type="text" id="form6Example5" class="form-control" placeholder="Enter new password" />
+                </div>
+            
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="form6Example6" class="form-control" placeholder="Additional info" />
+                </div>
+            
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="form6Example7" class="form-control" placeholder="Confirm your email address" />
+                </div>
+            
+                <div class="d-flex justify-content-end">
+                    <button data-mdb-ripple-init type="button" class="main-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>

@@ -125,8 +125,8 @@
           </a>
   
           <ul *ngIf="loginUser" class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item"><i class="fa-regular fa-user"></i> Manage My Account</a></li>
-            <li><a class="dropdown-item" routerLink="/ConfirmedOrders"><i class="fa-solid fa-bag-shopping"></i> My Orders</a></li>
+            <li><a routerLink="/Account" class="dropdown-item"><i class="fa-regular fa-user"></i> Manage My Account</a></li>
+            <li><a routerLink="/ConfirmedProducts" class="dropdown-item" routerLink="/ConfirmedOrders"><i class="fa-solid fa-bag-shopping"></i> My Orders</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
           </ul>

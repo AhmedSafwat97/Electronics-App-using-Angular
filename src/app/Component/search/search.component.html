@@ -49,6 +49,9 @@
   
   </section>
   <section class="my-5 container">
+    <div class="d-flex justify-content-center align-items-center w-100">
+      <div>We Found <span class="fw-bold">{{Products.length}}</span> Results</div>
+    </div>
   <div *ngIf="Products.length > 0 ; else noProducts">
     <div class="mt-5">
       <div class="d-flex flex-wrap justify-content-center align-items-center flex-wrap">

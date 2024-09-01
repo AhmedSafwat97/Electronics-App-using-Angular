@@ -33,6 +33,10 @@ export const routes: Routes = [
                     canActivate: [authGuard],
                     loadComponent: () => import('./Component/payment-data/payment-data.component').then(m => m.PaymentDataComponent) , title: 'Payment Form'},
     
+                    {path: 'Account', 
+                        canActivate: [authGuard],
+                        loadComponent: () => import('./Component/account/account.component').then(m => m.AccountComponent) , title: 'Account'},
+        
         ]
     
     } ,   
