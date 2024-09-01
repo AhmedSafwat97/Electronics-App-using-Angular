@@ -199,29 +199,26 @@ border-bottom: 2px solid black;
  }
 
 
-/* Ensure Toastr is fixed at the bottom of the viewport */
 .toast-bottom-right {
     position: fixed;
-    bottom: 20px;  /* Adjust as needed */
-    right: 20px;   /* Adjust as needed */
+    bottom: 20px; 
+    right: 20px;  
     z-index: 1050;
-    pointer-events: none; /* Ensure toasts don't interfere with other UI interactions */
-    width: auto; /* Optional: set the width as per your design */
+    pointer-events: none;
+    width: auto; 
   }
   
-  /* Ensure individual toasts are styled correctly */
   .toast {
-    margin-bottom: 10px; /* Space between multiple toasts */
-    pointer-events: auto; /* Re-enable pointer events for the individual toasts */
+    margin-bottom: 10px; 
+    pointer-events: auto; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 
-  /* Ensure the body and html take full height and allow fixed positioning */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Optional: prevent horizontal scrolling */
+    overflow-x: hidden;
   }
 
 
