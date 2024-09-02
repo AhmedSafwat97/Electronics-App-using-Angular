@@ -25,6 +25,7 @@ export class AccountComponent implements OnInit {
         this._userInfoServices.GetUserData().subscribe({
           next: (response) => {
             console.log(response)
+            this.userData = response.data
             response ? this._Spinner.hide() : this._Spinner.show()
           },
           error: (err) => {
