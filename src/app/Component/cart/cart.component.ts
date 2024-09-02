@@ -46,6 +46,7 @@ export class CartComponent implements OnInit {
       Product.quantity += 1
       this.UpdateCartItem(Product)
       console.log(Product.quantity)
+
     }
 
     DecrementQuantity(Product:any , element2:any): void {
@@ -59,8 +60,10 @@ export class CartComponent implements OnInit {
 
     UpdateCartItem(Product:any): void {
       this._ProductService.AddProductToCart(Product.product._id , Product.quantity ).subscribe({
+        
         next: (response) => {
           console.log(response.message);
+          this.TotalPrice = response.totalPrice
         }
       
       })

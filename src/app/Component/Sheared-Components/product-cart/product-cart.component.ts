@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './product-cart.component.html',
   styleUrl: './product-cart.component.scss'
 })
-export class ProductCartComponent  {
+export class ProductCartComponent implements OnInit {
 
   constructor(private _ProductService: ProductService ,
      private _Router: Router , 
@@ -21,7 +21,7 @@ export class ProductCartComponent  {
   @Input() Product!: Product; 
   @Input() i!: number;
   Quantity: number = 0;
-
+  isLogin : boolean = false;
   activeIndices: Set<number> = new Set<number>(); // To keep track of active indices
   items = [/* Your data here */]; // Example array of items
 
@@ -58,7 +58,7 @@ export class ProductCartComponent  {
 
   AddToCart(ProductId: string , addToCart: any): void {
     this.Quantity++;
-    if (localStorage.getItem('token')) {
+    if (this.isLogin) {
       this._Renderer2.setAttribute(addToCart , 'disabled' , 'true')
       this._ProductService.AddProductToCart(ProductId , this.Quantity ).subscribe({
         next: (response) => {
@@ -86,7 +86,7 @@ export class ProductCartComponent  {
   AddToFav(ProductId: string ): void {
     this.Quantity++;
 
-    if (localStorage.getItem('token')) {
+    if (this.isLogin) {
       this._ProductService.AddProductToFav(ProductId).subscribe({
         next: (response) => {
   
@@ -109,7 +109,7 @@ export class ProductCartComponent  {
 
   RemoveFromFav(ProductId: string ): void {
     this.Quantity++;
-    if (localStorage.getItem('token')) {
+    if (this.isLogin) {
       this._ProductService.RemoveProductFromFav(ProductId).subscribe({
         next: (response) => {
           console.log(response);
@@ -125,6 +125,24 @@ export class ProductCartComponent  {
     }
   }
 
+  LoginUser() {
+    if (localStorage.getItem('token')) {
+      this.isLogin = true
+    } else {
+      this.isLogin = false
+    }
+    return this.isLogin
+  }
+
+
+  ngOnInit(): void {
+
+    this.LoginUser()
+
+
+
+
+   }
 
 
 }
