@@ -24,7 +24,7 @@ export class ProductDetailsComponent implements OnInit { // Implements OnInit to
   ) { }
 
   ProductId!: string | null;
-  Product: Product = {} as Product;
+  Product: any
   relatedProducts: Product[] = [];
 
   goTop(): void {
