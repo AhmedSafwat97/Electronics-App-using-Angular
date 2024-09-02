@@ -28,7 +28,8 @@ export class WishlistComponent {
     this._ProductService.GetFavProducts().subscribe({
       next: (response) => {
         this.Wishlist = response.data.items
-        if (!response || !response.orders || response.orders.length === 0) {
+        console.log(this.Wishlist)
+        if (!response || !response.data || response.data.length === 0) {
           this._Spinner.hide(); 
         } else {
           this._Spinner.hide();
