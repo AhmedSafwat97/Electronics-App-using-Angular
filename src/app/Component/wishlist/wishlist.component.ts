@@ -36,6 +36,8 @@ export class WishlistComponent {
       },
       error: (err) => {
         console.log(err);
+        this._Spinner.hide();
+
       }
     })
 
