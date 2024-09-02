@@ -61,7 +61,11 @@ ngOnInit(): void {
       this.CartProducts = response.data.items
       this.TotalPrice = response.totalPrice
       this.cartId = response.data._id
-      response ? this._spinner.hide() : this._spinner.show()
+      if (!response || !response.orders || response.orders.length === 0) {
+        this._spinner.hide(); 
+      } else {
+        this._spinner.hide();
+      }
 
     },
     error: (err) => {

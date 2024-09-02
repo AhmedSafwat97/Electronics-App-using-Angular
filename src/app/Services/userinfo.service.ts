@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 export class UserinfoService {
   constructor(private _HttpClient: HttpClient) { }
 
-  Token:string = `Bearer ${localStorage.getItem('token')}`
 
 
   GetUserData(): Observable<any> {
@@ -16,7 +15,7 @@ export class UserinfoService {
       `https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/auth/LoginUser`,
       {
         headers: new HttpHeaders({
-          Authorization: this.Token,
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         })
       }
     );

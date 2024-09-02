@@ -9,7 +9,6 @@ export class ProductService {
 
   constructor(private _HttpClient: HttpClient) { }
 
-  Token:string = `Bearer ${localStorage.getItem('token')}`
 
   CartItems : BehaviorSubject<any> = new BehaviorSubject(0);
   
@@ -70,7 +69,7 @@ export class ProductService {
       {}, // The body is empty
       {
         headers: new HttpHeaders({
-          Authorization: this.Token,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
           productid: ProductId,
           quantity: Quantity.toString() // Ensure quantity is a string, as headers expect string values
         })
@@ -82,7 +81,7 @@ export class ProductService {
     return this._HttpClient.get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Cart/` , {
 
       headers: new HttpHeaders({
-        Authorization: this.Token,
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       })
 
 
@@ -93,7 +92,7 @@ export class ProductService {
     return this._HttpClient.delete(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Cart/` , {
 
       headers: new HttpHeaders({
-        Authorization: this.Token,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
         ProductId : ProductId
       })
 
@@ -107,7 +106,7 @@ export class ProductService {
       {}, // The body is empty
       {
         headers: new HttpHeaders({
-          Authorization: this.Token,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
           productid: ProductId,
         })
       }
@@ -119,7 +118,7 @@ export class ProductService {
       `  https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Wishlist/`, 
       {
         headers: new HttpHeaders({
-          Authorization: this.Token,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
           productid: ProductId,
         })
       }
@@ -130,7 +129,7 @@ export class ProductService {
     return this._HttpClient.get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Wishlist/` , {
 
       headers: new HttpHeaders({
-        Authorization: this.Token,
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       })
 
 
@@ -141,7 +140,7 @@ export class ProductService {
     return this._HttpClient.get(`https://web-api-ecommerce-byahmedsafwat.vercel.app/api/v1/Cart/ConfirmedOders` , {
 
       headers: new HttpHeaders({
-        Authorization: this.Token,
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       })
 
 

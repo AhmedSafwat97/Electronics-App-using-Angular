@@ -80,7 +80,11 @@ export class CartComponent implements OnInit {
         this.CartProducts = response.data.items
         this.TotalPrice = response.totalPrice
         this.cartId = response.data._id
-        response ? this._Spinner.hide() : this._Spinner.show()
+        if (!response || !response.orders || response.orders.length === 0) {
+          this._Spinner.hide(); 
+        } else {
+          this._Spinner.hide();
+        }
       },
       error: (err) => {
         console.log(err);

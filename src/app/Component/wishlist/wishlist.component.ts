@@ -28,8 +28,11 @@ export class WishlistComponent {
     this._ProductService.GetFavProducts().subscribe({
       next: (response) => {
         this.Wishlist = response.data.items
-        console.log(this.Wishlist);
-        this._Spinner.hide()
+        if (!response || !response.orders || response.orders.length === 0) {
+          this._Spinner.hide(); 
+        } else {
+          this._Spinner.hide();
+        }
       },
       error: (err) => {
         console.log(err);

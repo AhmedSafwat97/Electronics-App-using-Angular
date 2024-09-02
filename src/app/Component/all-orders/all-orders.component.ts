@@ -17,19 +17,23 @@ export class AllOrdersComponent implements OnInit {
   Orders: any = []
 
   ngOnInit(): void {
-    this._spinner.show()
-    this._ProductService.GetOrdersProducts().subscribe({
+    this._spinner.show();
 
+    this._ProductService.GetOrdersProducts().subscribe({
       next: (response) => {
         this.Orders = response.orders.reverse();
-        response ? this._spinner.hide() : this._spinner.show()
-      }, 
+    
+        if (!response || !response.orders || response.orders.length === 0) {
+          this._spinner.hide(); // Hide spinner if the response is empty
+        } else {
+          this._spinner.hide();
+        }
+      },
       error: (err) => {
         console.log(err);
+        this._spinner.hide(); 
       }
-
-
-    })
+    });
 
 
 
