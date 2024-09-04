@@ -72,9 +72,18 @@ export class ProductCartComponent implements OnInit {
             }
   
         },  error: (err) => {
+          console.log(err);
           if (err.message === 'Not authorized, token failed') {
             this._Router.navigate(['/login'])
           }
+
+          if (err.error.error === 'jwt expired') {
+            localStorage.removeItem('token')
+            this._Router.navigate(['/login'])
+
+          }
+
+
         } })
     } else {
       this._Router.navigate(['/login'])
@@ -92,12 +101,17 @@ export class ProductCartComponent implements OnInit {
   
           this.toastr.success('Click to go to wishlist', response.message).onTap.subscribe(() => {
             this._Router.navigate(['/wishlist']);});
-          console.log(response);
   
   
         },  error: (err) => {
           if (err.message === 'Not authorized, token failed') {
             this._Router.navigate(['/login'])
+          }
+          
+          if (err.error.error === 'jwt expired') {
+            localStorage.removeItem('token')
+            this._Router.navigate(['/login'])
+
           }
         } })
     } else {
@@ -118,6 +132,12 @@ export class ProductCartComponent implements OnInit {
         },  error: (err) => {
           if (err.message === 'Not authorized, token failed') {
             this._Router.navigate(['/login'])
+          }
+          
+          if (err.error.error === 'jwt expired') {
+            localStorage.removeItem('token')
+            this._Router.navigate(['/login'])
+
           }
         } })
     } else {

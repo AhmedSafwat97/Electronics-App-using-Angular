@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     navText: ['', ''],
     responsive: {
       0: {
-        items: 1
+        items: 2
       },
       400: {
         items: 2
