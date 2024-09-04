@@ -68,6 +68,12 @@ export class ProductDetailsComponent implements OnInit { // Implements OnInit to
           if (err.message === 'Not authorized, token failed') {
             this._Router.navigate(['/login'])
           }
+          
+          if (err.error.error === 'jwt expired') {
+            localStorage.removeItem('token')
+            this._Router.navigate(['/login'])
+
+          }
         }
         })
     
